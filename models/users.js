@@ -12,7 +12,16 @@ const UserSchema = new mongoose.Schema({
         min: 18
     }
     
+    
 })
+
+UserSchema.methods.findPeersOver18 = function (cb) {
+    return UserModel.find({
+        age: {
+            $gte: 18
+        }
+    });
+};
 
 //UserSchema.plugin(require('mongoose-autopopulate'))
 

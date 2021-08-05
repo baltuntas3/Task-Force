@@ -4,12 +4,12 @@ const UserModel = require('../models/users')
 class UserService extends BaseService {
     model = UserModel
 
-    /*async attendMeetup(User, meetup) {
-        User.meetups.push(meetup)
-        meetup.attendees.push(User)
-        await User.save()
-        await meetup.save()
-    }*/
+    async createGroup(senderId,receiverId) {
+        //firstly create a new message schema and refer to messages in users
+        //group.push(senderId)
+        //senderId.users.push(group)
+        
+    }
 }
 
 module.exports = new UserService()
