@@ -32,7 +32,6 @@ section{
 // @ is an alias to /src
 import UsersCard from '@/components/users-card.vue'
 import {mapActions, mapState} from "vuex"
-import { computed } from '@vue/runtime-core'
 
 export default {
   name: 'Home',

@@ -4,7 +4,8 @@ import axios from "axios"
 export default createStore({
   state: {
     users:[],
-    counter:0
+    counter:0,
+    clicked:true
   },
   mutations: {
     SET_USERS(state,data){
@@ -23,6 +24,20 @@ export default createStore({
     increaseCounter({commit}){
       const counter=this.state.counter+1
       commit("SET_COUNTER",counter)
+    },
+    activeSignIn(){
+      const signUpButton = document.getElementById('signUp');
+      const container = document.getElementById('container');
+      signUpButton.addEventListener('click', () => {
+        container.classList.add("right-panel-active");
+      });
+    },
+    activeSignUp(){
+      const signInButton = document.getElementById('signIn');
+      const container = document.getElementById('container');
+      signInButton.addEventListener('click', () => {
+        container.classList.remove("right-panel-active");
+      });
     }
   },
   modules: {
