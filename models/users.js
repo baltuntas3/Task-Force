@@ -10,20 +10,17 @@ const UserSchema = new mongoose.Schema({
         type: Number,
         required: true,
         min: 18
-    }
+    },
+    messages:[{
+        type: mongoose.SchemaTypes.ObjectId,
+            ref: 'MessageGroups',
+            
+    }]
     
     
 })
 
-UserSchema.methods.findPeersOver18 = function (cb) {
-    return UserModel.find({
-        age: {
-            $gte: 18
-        }
-    });
-};
-
-//UserSchema.plugin(require('mongoose-autopopulate'))
+UserSchema.plugin(require('mongoose-autopopulate'))
 
 const UserModel = mongoose.model('User', UserSchema)
 
