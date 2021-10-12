@@ -1,14 +1,23 @@
 const mongoose = require('mongoose')
 
 const MessageGroupsSchema = new mongoose.Schema({
-    users:[{
+    users:{
+        sender:{
             type: mongoose.SchemaTypes.ObjectId,
             ref: 'User',
             autopopulate: {
                 maxDepth: 1
             }
-           //add date or something 
-        }],
+        },
+        receiver:{
+            type: mongoose.SchemaTypes.ObjectId,
+            ref: 'User',
+            autopopulate: {
+                maxDepth: 1
+            }
+            
+        }
+    },
     messages:[{
         sender:{
             type: mongoose.SchemaTypes.ObjectId,
@@ -21,13 +30,7 @@ const MessageGroupsSchema = new mongoose.Schema({
     }]
      
 })
-MessageGroupsSchema.methods.findTheGroup = function (userId,cb) {
-    return MessageGroupsModel.find({
-        users: {
-            $in: userId
-        }
-    });
-};
+
 MessageGroupsSchema.plugin(require('mongoose-autopopulate'))
 
 const MessageGroupsModel = mongoose.model('MessageGroups', MessageGroupsSchema)

@@ -21,15 +21,13 @@ router.get('/del/:id', async (req, res) => {
 })
 
 
-router.get('/send-message/:receiverId', async (req, res) => {//think about it
-  //const senderId=await UserService.find("60f5c357a281e40a501201b5")//"asfffd",
-  //const receiverId=await UserService.find(req.params.receiverId)
-  const messages=await MessagesService.find("610a0f1a4aa305060ccd7126")//look here
-  const find= await messages.findTheGroup("6108b66168346e30f495f912")//this is my inbox
-  messages.messages.push({sender:"60f5c357a281e40a501201b5",message:"nbr asdas"})//we are sent a message to someone 
+router.get('/send-message/:receiverId', async (req, res) => {
+  const {receiverId}= req.params
+  //const senderId=await UserService.find("60f5c357a281e40a501201b5")//"asfffd", currently logged in user
+  const sendMessage = await MessagesService.sendMessage(receiverId,"naber??????")
 
-  console.log(find)
-  res.send(find)
+  console.log(sendMessage)
+  res.send(sendMessage)
   
 })
 
