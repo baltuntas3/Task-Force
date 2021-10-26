@@ -14,6 +14,10 @@ module.exports = class Service {
     async find(itemId) {
       return this.model.findById(itemId)
     }
+
+    async query(object){
+      return this.model.find(object)
+    }
     
     async update(itemId,set) {
       return this.model.update(itemId,set,{upsert:true})

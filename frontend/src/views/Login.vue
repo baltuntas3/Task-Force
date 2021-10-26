@@ -10,20 +10,11 @@ main
 <script>
 // @ is an alias to /src
 import LoginPage from '@/components/login-page.vue'
-import {mapActions, mapState} from "vuex"
+
 
 export default {
   name: 'Login',
-  components: {
-    LoginPage
-  },
-  computed:{
-    ...mapState(["users","clicked"])
-  },
-  methods:{
-    ...mapActions(["activeSignIn","activeSignUp"])
-  }
-  
+  components: { LoginPage }
 
 }
 </script>

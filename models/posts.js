@@ -14,12 +14,19 @@ const PostsSchema = new mongoose.Schema({
     category: [{
         type: String,
         required: true,
-    }]
+    }],
+    whose:{
+        type: mongoose.SchemaTypes.ObjectId,
+        ref: 'User',
+        autopopulate: {
+            maxDepth: 1
+        }
+    }
     
     
 })
 
-//UserSchema.plugin(require('mongoose-autopopulate'))
+PostsSchema.plugin(require('mongoose-autopopulate'))
 
 const PostsModel = mongoose.model('Posts', PostsSchema)
 

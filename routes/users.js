@@ -7,6 +7,7 @@ router.get('/all', async (req, res) => {
   const people = await UserService.findAll()
   res.render('list', { items: people })
 })
+
 router.get('/all/json', async (req, res) => {
   const users = await UserService.findAll()
   res.send(users)

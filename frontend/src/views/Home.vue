@@ -1,10 +1,12 @@
 <template lang="pug">
 main
   section
-    usersCard(v-for="user in users",:user="user")
+    h1 Users
+     ol
+      li(v-for="user in users")
+       | {{ user.messages }}
+       
   section
-    button.increment-button(@click="increaseCounter") incremtn
-    div {{counter}}
 </template>
 
 <style scoped>
@@ -30,22 +32,25 @@ section{
 
 <script>
 // @ is an alias to /src
-import UsersCard from '@/components/users-card.vue'
-import {mapActions, mapState} from "vuex"
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Home',
   components: {
-    UsersCard
+
   },
-  computed:{
-    ...mapState(["users","counter"])
+  data () {
+    return{
+      users:[],
+      isLoading: false
+    }
+  },
+  async mounted(){
+    this.users=await this.fetchAllUsers()
   },
   methods:{
-    ...mapActions(["getUsers","increaseCounter"])
+    ...mapActions(["fetchAllUsers"])
   },
-  created(){
-    this.getUsers()
-  }
+  
 }
 </script>

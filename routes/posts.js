@@ -8,6 +8,17 @@ router.get('/all', async (req, res) => {
   res.render('list', { items: posts })
 })
 
+router.get('/getAllJson', async (req, res) => {
+  const post = await PostsService.findAll()
+  res.send(post)
+})
+
+router.get('/getjson/:postId', async (req, res) => {
+  const {postId}=req.params
+  res.send(await PostsService.find(postId))
+})
+
+
 router.post('/', async (req, res) => {
     const post = await PostsService.add(req.body)
     res.send(post)

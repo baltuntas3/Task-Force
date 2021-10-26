@@ -3,7 +3,9 @@ export default {
   name: "Login",
   data(){
     return{
-      clicked:false
+      clicked:false,
+      userName:"",
+      password:""
     }
   },
 
@@ -32,8 +34,8 @@ div#container.container(v-bind:class="{'right-panel-active' : clicked}")
         a.social(href="#")
           i.fab.fa-facebook
       span or use your account
-      input(type="email", placeholder="Email")
-      input(type="password", placeholder="Password")
+      input(v-model="userName" type="email", placeholder="Email")
+      input(v-model="password" type="password", placeholder="Password")
       a(href="#") Forgot your password?
       button Sign In
   div.overlay-container
