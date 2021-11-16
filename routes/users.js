@@ -1,11 +1,14 @@
 const express = require('express')
 const router = express.Router()
-
 const UserService = require('../services/user_service')
+const passport=require("passport")
 
 router.get('/all', async (req, res) => {
-  const people = await UserService.findAll()
-  res.render('list', { items: people })
+  if(req.user){
+    const people = await UserService.findAll()
+    res.render('list', { items: people })
+  }else
+    res.status(403).send({msg:"izinsiz"})
 })
 
 router.get('/all/json', async (req, res) => {
@@ -23,11 +26,15 @@ router.get('/profile/:id', async (req, res) => {
   res.send(user)
 })
 
-router.get('/:id/peers-over-18', async (req, res) => {
-  const user = await UserService.find(req.params.id)
-  const peers = await user.findPeersOver18()
-  console.log(user)
-  res.send(peers)
+router.post("/login",passport.authenticate("local"),(req,res)=>{
+  console.log(req.user)
+  if(req.user){
+    res.status(200).send({msg:"successfully logged in.",user:req.user})
+  }else{
+    res.status(403).send("problem")
+  }
+  
 })
+
 
 module.exports = router
