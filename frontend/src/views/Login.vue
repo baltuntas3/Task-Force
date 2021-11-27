@@ -1,6 +1,5 @@
 <template lang="pug">
-main
-    LoginPage
+LoginPage
 </template>
 
 <style scoped>

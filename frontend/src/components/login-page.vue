@@ -1,23 +1,42 @@
 <script>
+import {mapActions,mapState} from "vuex" 
+import VueCookies from 'vue-cookies'
 export default {
   name: "Login",
   data(){
     return{
       clicked:false,
       userName:"",
-      password:""
+      password:"",
+      auth:false,
+      error:false
     }
   },
+  computed: {
+    ...mapState(['user'])
+  },
+  methods:{
+     ...mapActions(["login","getUser"]),
 
+     async loginButton(){
+        const loginRequest=await this.login({username:this.userName,password:this.password})
+        console.log(loginRequest)
+    }
+  }
+  ,created(){
+    this.getUser()
+  }
+   
 };
 
 
 </script>
 
 <template lang="pug">
-div#container.container(v-bind:class="{'right-panel-active' : clicked}")
+p(v-if="user") {{user["data"]["user"]["username"]}} olarak zaten giriş yaptınız.
+div#container.container(v-else v-bind:class="{'right-panel-active' : clicked}")
   div.form-container.sign-up-container
-    form(action="#", method="POST")
+    form(action="#" method="POST")
       h1 Sign up
       div.social-container
         a.social
@@ -28,16 +47,19 @@ div#container.container(v-bind:class="{'right-panel-active' : clicked}")
       input(type="password", placeholder="Password")
       button Sign Up
   div.form-container.sign-in-container
-    form(action="#" @submit.prevent="submitForm" autocomplete="off")
-      h1 Sign in
+    form(@submit.prevent="loginButton")
+      h1(v-if="error") Yanlışlık var
+      h1 Sign in 
+      | asdasd {{error}}
       div.social-container
         a.social(href="#")
           i.fab.fa-facebook
       span or use your account
-      input(v-model="userName" type="email", placeholder="Email")
+      input(v-model="userName" type="text", placeholder="Email") 
+      | {{userName}}
       input(v-model="password" type="password", placeholder="Password")
       a(href="#") Forgot your password?
-      button Sign In
+      button(type="submit") Sign In
   div.overlay-container
     div.overlay
       div.overlay-panel.overlay-left
@@ -50,23 +72,8 @@ div#container.container(v-bind:class="{'right-panel-active' : clicked}")
         button.ghost#signUp(@click="clicked=true") Sign Up
 </template>
 
-<style scoped>
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+<style lang="scss" scoped>
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background: #f6f5f7;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  font-family: "Montserrat", sans-serif;
-  height: 100vh;
-  margin: -20px 0 50px;
-}
 
 h1 {
   font-weight: bold;

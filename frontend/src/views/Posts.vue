@@ -11,7 +11,7 @@ export default {
   ,data(){
       return{
           posts:[],
-          isLoading:false
+          isLoading:true
       }
   },
   methods:{
@@ -19,6 +19,7 @@ export default {
   },
   async mounted(){
       this.posts=await this.fetchAllPosts()
+      this.isLoading=false
   }
 }
 </script>
@@ -26,20 +27,21 @@ export default {
 
 
 <template lang="pug">
-main
-  section
-   h1 POSTS
-    .container
-     postPage(v-for="postCard in posts" :post="postCard")
+
+p(v-if="isLoading===true") Please wait...
+.container(v-else)
+  postPage(v-for="postCard in posts" :post="postCard")
 
 </template>
 
 <style scoped>
+
 .container {
+  margin-top: 3%;
   display: flex;
-  width: 1040px;
-  justify-content: left;
-  flex-wrap: nowrap;
+  justify-content: center;
+  flex-wrap: wrap;
+  height: 60%;
 }
 </style>
 

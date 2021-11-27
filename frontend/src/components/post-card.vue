@@ -6,7 +6,6 @@ export default {
 </script>
 
 <template lang="pug">
-
 .card
   .card-header
     img(src='https://c0.wallpaperflare.com/preview/483/210/436/car-green-4x4-jeep.jpg' alt='rover')
@@ -24,19 +23,7 @@ export default {
 </template>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-* {
-  box-sizing: border-box;
-}
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 0;
-  background-color: #f7f8fc;
-  font-family: "Roboto", sans-serif;
-  color: #10182f;
-}
+
 .card {
   margin: 10px;
   background-color: #fff;

@@ -10,6 +10,9 @@ main
 </template>
 
 <style scoped>
+main{
+  height: 100%;
+}
 section{
   padding: 40px 0;
 }
